@@ -3,10 +3,9 @@ const { EXCEPTION_LIST } = require('../test/exceptionsCase');
 const { PARAMS_ERROR_CODE, ONE_IN_UID_LIST_TIMEOUT_CODE, ONE_IN_UID_LIST_ERROR_CODE, REQUEST_TIMEOUT_MS, EVIL_TYPE_CODE_MAP } = require('../config/evilTest');
 
 /**
- * 
- * @param {*} ts setTimeout的定时时间
- * @param {*} expectionConfig  异常case配置
- * @param {*} triggerBatchTaskNumber 触发批量请求
+ * @param {Number} ts setTimeout的定时时间
+ * @param {Object} expectionConfig  异常case配置
+ * @param {Number} triggerBatchTaskNumber 触发批量请求的task数目
  */
 function initConfig(ts, triggerBatchTaskNumber, expectionConfig) {
     let timer = null;
@@ -124,8 +123,8 @@ const runTest = initConfig(100, 100, { evilTestSwitch: true, evilTypeCode: ONE_I
 // exception3
 // const runTest = initConfig(100, 100, { evilTestSwitch: true, evilTypeCode: PARAMS_ERROR_CODE });
 
-// 因为uid列表长度<100，会按定时器来发起batchRequest
+// 如果uid列表长度<100，会按定时器来发起batchRequest
 // runTest(50);
 
-// 因为uid列表长度>=100，会直接发起batchRequest
+// 如果uid列表长度>=100，会直接发起batchRequest
 runTest(100);
