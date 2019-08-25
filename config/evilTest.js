@@ -1,7 +1,7 @@
 const PARAMS_ERROR_CODE = 1000;
 const ONE_IN_UID_LIST_TIMEOUT_CODE = 1002;
 const ONE_IN_UID_LIST_ERROR_CODE = 1003;
-const REQUEST_TIMEOUT_MS = 2100;
+const REQUEST_TIMEOUT_MS = 1000;
 
 // 异常和边界测试，在这个文件中配置。
 const evilTypeList = [
@@ -15,6 +15,13 @@ const evilTypeList = [
             if (time) {
                 timeInfo = `耗时 ${time} ${unit}`;
             }
+            console.log('object', {
+                code: ONE_IN_UID_LIST_TIMEOUT_CODE,
+                success: false,
+                message: `批量获取的uid太多，先返回部分，${reTryUids.toString()} 请重新请求！! ${timeInfo}`,
+                data,
+                reTryUids
+            });
             return {
                 code: ONE_IN_UID_LIST_TIMEOUT_CODE,
                 success: false,
