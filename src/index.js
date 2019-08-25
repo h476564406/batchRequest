@@ -72,7 +72,7 @@ const indexModule = {
         for (var index = 0, len = uidIds.length; index < len; index++) {
             const uid = uidIds[index];
             str += `<div class="${styles.module}">
-                <div><span class="${styles.moduleText}">module:${uid}</span><span>uid:${uid}</span></div>
+                <div><span class="${styles.moduleText}">module:${uid}</span><span  class="${styles.uidText}">uid:${uid}</span></div>
                 <div>
                     <button class="${styles.moduleButton}" id="button${uid}" onclick="clickButton(${uid})">
                         click me
@@ -92,12 +92,12 @@ const indexModule = {
         const self = this;
         clearTimeout(self.timer);
         setTimeout((function () {
+            console.log('settimeout fn called!!! cacheAjaxReqQueue', self.cacheAjaxReqQueue);
             // 如果cacheAjaxReqQueue为空，那么重新设置定时器。
             if (!self.cacheAjaxReqQueue.length) {
                 self.timer = self.watchingStart(inBatchIntervalMs);
                 return;
             }
-            console.log('settimeout fn called!!! cacheAjaxReqQueue', self.cacheAjaxReqQueue);
             // 去重操作
             const uidList = Array.from(new Set(self.cacheAjaxReqQueue.map(item => {
                 return item.uid;
