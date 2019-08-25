@@ -1,0 +1,23 @@
+body h1 {
+    text-align: center;
+}
+
+.module {
+    display: flex;
+    border: 1px solid black;
+    margin-bottom: 20px;
+    align-items: center;
+    padding: 10px;
+}
+
+.moduleText {
+    margin-right: 20px;
+}
+.moduleButton {
+    margin-left: 40px;
+}
+
+.profile {
+    color: #f00;
+    margin-left: 40px;
+}

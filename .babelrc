@@ -1,0 +1,59 @@
+{
+    // preset，也就是预置条件。转码规则
+    "presets": [
+        [
+            "env",
+            {
+                "targets": {
+                    // 确定在 preset的插件中支持的最低浏览器版本。
+                    // 支持拥有市场份额超过1%的浏览器, 支持浏览器的最新两个版本以及ie8以上
+                    "browsers": ["> 1%", "last 2 versions", "not ie <= 8"],
+                    // targets.node 设置为 true 或 "current" 可以根据当前 Node.js 版本进行动态转换。也可以设置为具体的数字表示需要支持的最低的 Node.js 版本。
+                    "node": "current"
+                },
+                //useBuiltIns 可以根据之前的配置自行添加 polyfill，默认不开启。安装 babel-polyfill 后只要引入一次就行：
+                "useBuiltIns": true,
+                // Module build failed: Invariant Violation: Invalid Option: The 'modules' option must be either 'false' to indicate no modules, or a  module type which can be be one of: 'commonjs' (default), 'amd', 'umd', 'systemjs'.
+                "modules": false,
+                "debug": false
+            }
+        ],
+        // 草案阶段已经具有了新特性
+        "stage-2",
+        // 如果是需要支持 jsx, 可以使用babel-preset-react或者"plugins transform-react-jsx
+        "react"
+    ]
+    // 按环境分别配置
+    // "env": {
+    // "production": {
+    //     "plugins": [
+    //         "transform-react-jsx",
+    //         // Babel 几乎可以编译所有时新的 JavaScript 语法，但对于 APIs 来说却并非如此。例如： Promise、Set、Map 等新增对象，Object.assign、Object.entries等静态方法。
+    //         [
+    //             "transform-runtime",
+    //             {
+    //                 "helpers": true,
+    //                 "polyfill": true,
+    //                 "regenerator": true,
+    //                 //  moduleName 在转译的时候，用 babel-runtime转换语法，包含 core-js，regenerator，helpers 三个静态包。
+    //                 "moduleName": "babel-runtime"
+    //             }
+    //         ]
+    //     ]
+    // }
+    // "development": {
+    //     "plugins": [
+    //         "transform-react-jsx",
+    //         [
+    //             "transform-runtime",
+    //             {
+    //                 "helpers": false,
+    //                 "polyfill": false,
+    //                 "regenerator": true,
+    //                 "moduleName": "babel-runtime"
+    //             }
+    //         ]
+    //     ]
+    // }
+    // }
+}
