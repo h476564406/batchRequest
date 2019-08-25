@@ -87,6 +87,11 @@ const EXCEPTION_LIST = {
             const returnInfo = EVIL_TYPE_CODE_MAP[evilTypeCode].returnInfo(reTryUids.length, data, reTryUids);
             return Promise.reject(returnInfo);
         });
+    },
+    // 模拟参数错误
+    [PARAMS_ERROR_CODE]: function (uids, evilTypeCode) {
+        const returnInfo = EVIL_TYPE_CODE_MAP[evilTypeCode].returnInfo(`uid 参数错误！你的uid传参：${uids.toString()}`, reTryUids);
+        return Promise.reject(returnInfo);
     }
 }
 

@@ -90,10 +90,14 @@ function initConfig(ts, triggerBatchTaskNumber, expectionConfig) {
                 getProfiles(error.data);
                 if (error.reTryUids && error.reTryUids.length) {
                     batchRequest(error.reTryUids);
+                } else {
+                    //  重新设置定时器
+                    timer = watchingStart(ts);
                 }
                 filterCacheAjaxReqQueue(error.data.map(item => { return item.uid }));
-                //  重新设置定时器
-                timer = watchingStart(ts);
+            } else {
+                // 其他类型的错误就不重新设置定时器了比如参数错误
+                console.log(`错误码: ${error.code}, 错误信息：${error.message} `);
             }
         })
     };
@@ -109,17 +113,19 @@ function initConfig(ts, triggerBatchTaskNumber, expectionConfig) {
     };
 }
 
-// success: 异步调用完全成功 evilTestSwitch: false
-// const runTest = initConfig(1000, 100, { evilTestSwitch: false });
+// [success]: 异步调用完全成功 evilTestSwitch: false
+// const runTest = initConfig(100, 100, { evilTestSwitch: false });
 
-// exception: 出现各种异常情况 evilTestSwitch: true, evilTypeCode 异常类型
+// [exception]: 出现各种异常情况 evilTestSwitch: true, evilTypeCode 异常类型
 // exception1
-const runTest = initConfig(1000, 100, { evilTestSwitch: true, evilTypeCode: ONE_IN_UID_LIST_TIMEOUT_CODE });
+const runTest = initConfig(100, 100, { evilTestSwitch: true, evilTypeCode: ONE_IN_UID_LIST_TIMEOUT_CODE });
 // exception2
 // const runTest = initConfig(100, 100, { evilTestSwitch: true, evilTypeCode: ONE_IN_UID_LIST_ERROR_CODE });
+// exception3
+// const runTest = initConfig(100, 100, { evilTestSwitch: true, evilTypeCode: PARAMS_ERROR_CODE });
 
 // 因为uid列表长度<100，会按定时器来发起batchRequest
-runTest(50);
+// runTest(50);
 
 // 因为uid列表长度>=100，会直接发起batchRequest
-// runTest(100);
+runTest(100);

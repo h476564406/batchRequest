@@ -51,7 +51,7 @@ const evilTypeList = [
             return {
                 code: PARAMS_ERROR_CODE,
                 success: false,
-                message: '参数错误！',
+                message,
                 reTryUids
             };
         }
